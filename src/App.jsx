@@ -3,16 +3,17 @@ import { StreamChat } from "stream-chat";
 import { Chat } from "stream-chat-react";
 import Cookies from "universal-cookie";
 
-import { ChannelContainer, ChannelListContainer, Auth } from "./components";
+import { ChannelListContainer, ChannelContainer, Auth } from "./components";
+
 import "stream-chat-react/dist/css/index.css";
 import "./App.css";
 
 const cookies = new Cookies();
 
-const api_key = "gcs7n5g75cwg";
+const apiKey = "gcs7n5g75cwg";
 const authToken = cookies.get("token");
 
-const client = StreamChat.getInstance(api_key);
+const client = StreamChat.getInstance(apiKey);
 
 if (authToken) {
   client.connectUser(
@@ -33,9 +34,7 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  if (!authToken) {
-    return <Auth />;
-  }
+  if (!authToken) return <Auth />;
 
   return (
     <div className="app__wrapper">
@@ -44,13 +43,13 @@ const App = () => {
           isCreating={isCreating}
           setIsCreating={setIsCreating}
           setCreateType={setCreateType}
-          isEditing={isEditing}
+          setIsEditing={setIsEditing}
         />
         <ChannelContainer
           isCreating={isCreating}
           setIsCreating={setIsCreating}
-          setIsEditing={setIsEditing}
           isEditing={isEditing}
+          setIsEditing={setIsEditing}
           createType={createType}
         />
       </Chat>
